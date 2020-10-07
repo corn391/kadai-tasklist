@@ -1,9 +1,15 @@
+<% if logged_in? %>
+  <p>こんにちは<%= current_user.name %>さん</p>
+<% else %>
 <div class="center jumbotron">
   <div class="text-center">
     <h1>新規登録</h1>
     <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+    <h2>登録済みの方はこちらからログインしてください</h2>
+    <%=link_to 'Login!', login_path, class:  'btn btn-lg btn-primary' %>
   </div>
 </div>
+<% end %>
 <h1>タスク一覧</h1>
 <ul>
     <% @tasks.each do |task| %>
@@ -11,3 +17,11 @@
     <% end %>
 </ul>
 <%= link_to '新規タスクの追加', new_task_path %>
+<% if logged_in? %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>ログアウト</h1>
+      <%= link_to 'Logout', logout_path, method: :delete %>
+    </div>
+  </div>
+<% end %>
